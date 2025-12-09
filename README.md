@@ -10,3 +10,10 @@ Descrição: O projeto tem como principal objetivo mapear e cadastrar órgãos d
 O projeto foi programado e testado na linguagem PHP, o banco de dados utilizado foi Mysql com o uso do usbwebserver,
 porem pode ser utilizado usando xampp ou outro programa similar.
 Ele usa o padrao MVC (Model View Controler) com CRUD (Create Read Update Delete).
+
+Para sua execução inicie o usbwebserver ou um programa similar, 
+crie um database de nome: "orgaos_seguranca",
+dentro execute o arquvo sql anexado,
+mova a pasta teste3 para dentro da pasta root do usbwebserver,
+por fim teste e se divirta.
+
