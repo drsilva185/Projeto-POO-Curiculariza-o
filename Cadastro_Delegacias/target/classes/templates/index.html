@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Cadastro de Orgaos de Seguranca</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f4f4f4; margin: 0; }
+        .container { text-align: center; padding: 40px; background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        h1 { color: #333; margin-bottom: 30px; }
+        .button-group a {
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .btn-list {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-list:hover {
+            background-color: #0056b3;
+        }
+        .btn-new {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-new:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Bem-vindo ao Sistema de Cadastro de Delegacias</h1>
+
+    <div class="button-group">
+
+        <a th:href="@{/delegacias}" class="btn-list">
+            Ver Lista de Delegacias
+        </a>
+
+        <a th:href="@{/delegacias/novo}" class="btn-new">
+            Cadastrar Nova Delegacia
+        </a>
+
+        <a th:href="@{/bombeiro}" class="btn-list">
+            Ver Lista de Corpos de Bombeiro
+        </a>
+
+        <a th:href="@{/bombeiro/novo}" class="btn-new">
+            Cadastrar Novo Corpo de Bombeiro
+        </a>
+
+    </div>
+</div>
+</body>
+</html>

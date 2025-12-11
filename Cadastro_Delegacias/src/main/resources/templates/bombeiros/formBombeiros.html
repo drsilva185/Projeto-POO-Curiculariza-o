@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Corpos de Bombeiro</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        h1 { text-align: center; color: #333; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input[type="text"] { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 4px; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 15px; }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; font-size: 0.9em; margin-top: 3px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/bombeiro}" th:object="${bombeiro}" method="post">
+
+        <h1>Cadastro/Edição de Corpos de Bombeiros</h1>
+
+        <input type="hidden" th:field="*{id}" />
+
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" placeholder="Nome do Corpo" />
+            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error">Erro no Nome</span>
+        </div>
+
+        <div>
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" th:field="*{endereco}" placeholder="Rua, Número, Bairro" />
+            <span th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="error">Erro no Endereço</span>
+        </div>
+
+        <div>
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" th:field="*{telefone}" placeholder="(XX) XXXX-XXXX" />
+            <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="error">Erro no Telefone</span>
+        </div>
+
+        <button type="submit">Salvar Corpo</button>
+        <a th:href="@{/bombeiro}"><button type="button">Cancelar e Voltar para a Lista</button></a>
+
+    </form>
+</div>
+</body>
+</html>

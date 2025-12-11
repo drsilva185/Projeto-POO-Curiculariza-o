@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Corpos de Bombeiro Cadastradas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .actions a { margin-right: 10px; text-decoration: none; color: #007bff; }
+        .actions a:hover { text-decoration: underline; }
+        .novo-btn { display: inline-block; background-color: #28a745; color: white; padding: 10px 15px; border-radius: 4px; text-decoration: none; margin-bottom: 20px; }
+        .novo-btn:hover { background-color: #1e7e34; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Corpos de Bombeiros Cadastradas</h1>
+
+    <a th:href="@{/bombeiro/novo}" class="novo-btn">Cadastrar Novo Corpo</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bombeiro : ${listaBombeiros}">
+            <td th:text="${bombeiro.id}">1</td>
+            <td th:text="${bombeiro.nome}">Delegacia Central</td>
+            <td th:text="${bombeiro.endereco}">Rua Principal, 100</td>
+            <td th:text="${bombeiro.telefone}">(11) 98765-4321</td>
+            <td class="actions">
+                <a th:href="@{/bombeiro/editar/{id}(id=${bombeiro.id})}">Editar</a>
+
+                <a th:href="@{/bombeiro/deletar/{id}(id=${bombeiro.id})}"
+                   onclick="return confirm('Tem certeza que deseja deletar este Corpo de Bombeiros?');">Deletar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p th:if="${listaBombeiros.isEmpty()}">Nenhum Corpo de Bombeiro cadastrado.</p>
+</div>
+</body>
+</html>
