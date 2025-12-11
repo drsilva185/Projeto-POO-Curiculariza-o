@@ -19,3 +19,6 @@ por fim teste e se divirta.
 
 # Observação Importante ❗❗❗❗
 Originalmente o Back end do projeto era para ser feito em java porém tive problemas com o springboot para não atrasar a entrga para obtenção de nota refiz o back end em php.
+
+# Atualização 11/12/2025
+Corrigido os problemas enfrentados ao iniciar o springboot em java e adicionado no git.
