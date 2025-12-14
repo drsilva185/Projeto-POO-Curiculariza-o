@@ -1,0 +1,95 @@
+# Relatório de Especificações de Endpoints (Spring Boot MVC)
+
+## I. Visão Geral da Aplicação
+
+Esta aplicação utiliza Spring Boot com Spring MVC e Thymeleaf para implementar o CRUD (Create, Read, Update, Delete) nas entidades Delegacia, Policial, Bombeiro(Corpo de Bombeiros), Bombeiros. Os endpoints abaixo mapeiam as requisições HTTP para a lógica de negócio.
+
+---
+
+## II. Especificação de Endpoints (Rotas)
+
+A base da aplicação é executada em `http://localhost:8081` (ou a porta configurada no `application.properties`).
+
+### 1. Endpoints da Entidade: Delegacia (Prefixo: /delegacias)
+
+| Método HTTP | Endpoint (URL) | Descrição | Parâmetros de URL | Tipo de Resposta | Controller Responsável |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/delegacias` | **Listar Todos.** Exibe a lista completa de todas as delegacias cadastradas. | Nenhum | Template HTML (`listaDelegacias.html`) | `DelegaciaController.listarDelegacias()` |
+| `GET` | `/delegacias/novo` | **Exibir Formulário.** Exibe o formulário vazio para criação de uma nova delegacia. | Nenhum | Template HTML (`formDelegacia.html`) | `DelegaciaController.exibirFormulario()` |
+| `POST` | `/delegacias` | **Salvar/Criar/Atualizar.** Recebe os dados do formulário para salvar uma nova delegacia ou atualizar uma existente (se o ID estiver presente). | Corpo: Objeto `Delegacia` (Formulário) | Redirecionamento (`redirect:/delegacias`) | `DelegaciaController.salvarDelegacia()` |
+| `GET` | `/delegacias/editar/{id}` | **Exibir Formulário de Edição.** Busca uma delegacia pelo ID e preenche o formulário para edição. | `{id}`: ID da delegacia (Path Variable) | Template HTML (`formDelegacia.html`) | `DelegaciaController.editarDelegacia()` |
+| `GET` | `/delegacias/deletar/{id}` | **Deletar.** Remove uma delegacia específica pelo ID. | `{id}`: ID da delegacia (Path Variable) | Redirecionamento (`redirect:/delegacias`) | `DelegaciaController.deletarDelegacia()` |
+
+### 2. Endpoints da Entidade: Policial (Prefixo: /policiais)
+
+| Método HTTP | Endpoint (URL) | Descrição | Parâmetros de URL | Tipo de Resposta | Controller Responsável |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/policiais` | **Listar Todos.** Exibe a lista completa de todos os policiais cadastrados. | Nenhum | Template HTML (`listaPoliciais.html`) | `PolicialController.listarPoliciais()` |
+| `GET` | `/policiais/novo` | **Exibir Formulário.** Exibe o formulário vazio para cadastro de um novo policial. | Nenhum | Template HTML (`formPolicial.html`) | `PolicialController.exibirFormulario()` |
+| `POST` | `/policiais` | **Salvar/Criar/Atualizar.** Recebe os dados do formulário (incluindo a FK da Delegacia) para salvar/atualizar. | Corpo: Objeto `Policial` (Formulário) | Redirecionamento (`redirect:/policiais`) | `PolicialController.salvarPolicial()` |
+| `GET` | `/policiais/editar/{id}` | **Exibir Formulário de Edição.** Busca um policial pelo ID e preenche o formulário para edição. | `{id}`: ID do policial (Path Variable) | Template HTML (`formPolicial.html`) | `PolicialController.editarPolicial()` |
+| `GET` | `/policiais/deletar/{id}` | **Deletar.** Remove um policial específico pelo ID. | `{id}`: ID do policial (Path Variable) | Redirecionamento (`redirect:/policiais`) | `PolicialController.deletarPolicial()` |
+
+
+### 3. Endpoints da Entidade: Bombeiro (Prefixo: /bombeiro)
+
+| Método HTTP | Endpoint (URL) | Descrição | Parâmetros de URL | Tipo de Resposta | Controller Responsável |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/bombeiro` | **Listar Todos.** Exibe a lista completa de todos os corpos de bombeiro cadastradas. | Nenhum | Template HTML (`listaBombeiro.html`) | `BombeiroController.listarBombeiros()` |
+| `GET` | `/bombeiro/novo` | **Exibir Formulário.** Exibe o formulário vazio para criação de um novo corpo de bombeiro. | Nenhum | Template HTML (`formBombeiro.html`) | `BombeiroController.exibirFormulario()` |
+| `POST` | `/bombeiro` | **Salvar/Criar/Atualizar.** Recebe os dados do formulário para salvar um novo corpo de bombeiros ou atualizar uma existente (se o ID estiver presente). | Corpo: Objeto `Bombeiro` (Formulário) | Redirecionamento (`redirect:/bombeiro`) | `BombeiroController.salvarBombeiro()` |
+| `GET` | `/bombeiro/editar/{id}` | **Exibir Formulário de Edição.** Busca um corpo de bombeiros pelo ID e preenche o formulário para edição. | `{id}`: ID do corpo de bombeiros (Path Variable) | Template HTML (`formBombeiro.html`) | `BombeiroController.editarBombeiro()` |
+| `GET` | `/bombeiro/deletar/{id}` | **Deletar.** Remove um corpo de bombeiros específica pelo ID. | `{id}`: ID do corpo de bombeiros (Path Variable) | Redirecionamento (`redirect:/bombeiro`) | `BombeiroController.deletarBombeiro()` |
+
+### 4. Endpoints da Entidade: Bombeiros (Prefixo: /bombeiros)
+
+| Método HTTP | Endpoint (URL) | Descrição | Parâmetros de URL | Tipo de Resposta | Controller Responsável |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/bombeiros` | **Listar Todos.** Exibe a lista completa de todos os bombeiros cadastrados. | Nenhum | Template HTML (`listaBombeiros.html`) | `BombeirosController.listarBombeiros()` |
+| `GET` | `/bombeiros/novo` | **Exibir Formulário.** Exibe o formulário vazio para cadastro de um novo bombeiro. | Nenhum | Template HTML (`formBombeiros.html`) | `BombeirosController.exibirFormulario()` |
+| `POST` | `/bombeiros` | **Salvar/Criar/Atualizar.** Recebe os dados do formulário (incluindo a FK do corpo de bombeiros) para salvar/atualizar. | Corpo: Objeto `Bombeiros` (Formulário) | Redirecionamento (`redirect:/bombeiros`) | `BombeirosController.salvarBombeiros()` |
+| `GET` | `/bombeiros/editar/{id}` | **Exibir Formulário de Edição.** Busca um bombeiro pelo ID e preenche o formulário para edição. | `{id}`: ID do bombeiro (Path Variable) | Template HTML (`formBombeiros.html`) | `BombeirosController.editarBombeiros()` |
+| `GET` | `/bombeiros/deletar/{id}` | **Deletar.** Remove um bombeiro específico pelo ID. | `{id}`: ID do bombeiro (Path Variable) | Redirecionamento (`redirect:/bombeiros`) | `BombeirosController.deletarBombeiros()` |
+---
+
+## III. Schemas de Dados (Modelos)
+
+Esta seção descreve a estrutura das entidades persistidas pelo sistema.
+
+### 1. Entidade `Delegacia` (Tabela: `delegacias`)
+
+| Campo | Tipo no Banco | Requisitos (Java/JPA) | Descrição |
+| :--- | :--- | :--- | :--- |
+| `id` | `BIGINT` | PK, Auto Gerado | Chave primária. |
+| `nome` | `VARCHAR(100)` | `@NotBlank` | Nome da unidade policial. |
+| `endereco` | `VARCHAR(255)` | `@NotBlank` | Endereço físico. |
+| `telefone` | `VARCHAR(20)` | `@NotBlank` | Contato da unidade. |
+
+### 2. Entidade `Policial` (Tabela: `policiais`)
+
+| Campo | Tipo no Banco | Requisitos (Java/JPA) | Descrição |
+| :--- | :--- | :--- | :--- |
+| `id` | `BIGINT` | PK, Auto Gerado | Chave primária. |
+| `nome` | `VARCHAR(150)` | `@NotBlank` | Nome completo do policial. |
+| **`patente`** | `VARCHAR(50)` | `@NotBlank` | Posto ou patente hierárquica. |
+| `matricula` | `VARCHAR(...)` | `@NotBlank`, **Único** | Número de registro ou matrícula. |
+| `delegacia_id` | `BIGINT` | FK, `@NotNull` | Chave estrangeira para a tabela `delegacias` (Relacionamento Many-to-One). |
+
+### 3. Entidade `Bombeiro` (Tabela: `bombeiro`)
+
+| Campo | Tipo no Banco | Requisitos (Java/JPA) | Descrição |
+| :--- | :--- | :--- | :--- |
+| `id` | `BIGINT` | PK, Auto Gerado | Chave primária. |
+| `nome` | `VARCHAR(100)` | `@NotBlank` | Nome do corpo de bombeiros
+| `endereco` | `VARCHAR(255)` | `@NotBlank` | Endereço físico. |
+| `telefone` | `VARCHAR(20)` | `@NotBlank` | Contato da unidade. |
+
+### 4. Entidade `Bombeiros` (Tabela: `bombeiros`)
+
+| Campo | Tipo no Banco | Requisitos (Java/JPA) | Descrição |
+| :--- | :--- | :--- | :--- |
+| `id` | `BIGINT` | PK, Auto Gerado | Chave primária. |
+| `nome` | `VARCHAR(150)` | `@NotBlank` | Nome completo do bombeiro. |
+| **`patente`** | `VARCHAR(50)` | `@NotBlank` | Posto ou patente hierárquica. |
+| `matricula` | `VARCHAR(...)` | `@NotBlank`, **Único** | Número de registro ou matrícula. |
+| `bombeiro_id` | `BIGINT` | FK, `@NotNull` | Chave estrangeira para a tabela `bombeiro` (Relacionamento Many-to-One). |
