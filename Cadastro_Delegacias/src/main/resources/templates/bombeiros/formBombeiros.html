@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Corpos de Bombeiro</title>
+    <title>Cadastro de Bombeiros</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
@@ -15,35 +15,49 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <form th:action="@{/bombeiro}" th:object="${bombeiro}" method="post">
+<div>
+    <div class="container">
+        <h1>Cadastro de Bombeiros</h1>
 
-        <h1>Cadastro/Edição de Corpos de Bombeiros</h1>
+        <form th:action="@{/bombeiros}" th:object="${bombeiros}" method="post">
 
-        <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{id}" />
 
-        <div>
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" th:field="*{nome}" placeholder="Nome do Corpo" />
-            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error">Erro no Nome</span>
-        </div>
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" placeholder="Nome Completo do Policial" />
+                <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error">Erro no Nome</span>
+            </div>
 
-        <div>
-            <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" th:field="*{endereco}" placeholder="Rua, Número, Bairro" />
-            <span th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="error">Erro no Endereço</span>
-        </div>
+            <div>
+                <label for="patente">Patente/Posto:</label>
+                <input type="text" id="patente" th:field="*{patente}" placeholder="Ex: Soldado, Cabo, Delegado" />
+                <span th:if="${#fields.hasErrors('patente')}" th:errors="*{patente}" class="error">Erro na Patente</span>
+            </div>
 
-        <div>
-            <label for="telefone">Telefone:</label>
-            <input type="text" id="telefone" th:field="*{telefone}" placeholder="(XX) XXXX-XXXX" />
-            <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="error">Erro no Telefone</span>
-        </div>
+            <div>
+                <label for="matricula">Matrícula (Registro):</label>
+                <input type="text" id="matricula" th:field="*{matricula}" placeholder="Número de Registro Único" />
+                <span th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}" class="error">Erro na Matrícula</span>
+            </div>
 
-        <button type="submit">Salvar Corpo</button>
-        <a th:href="@{/bombeiro}"><button type="button">Cancelar e Voltar para a Lista</button></a>
+            <div>
+                <label for="bombeiro">Bombeiro (Unidade):</label>
+                <select id="bombeiro" th:field="*{bombeiro}" required>
+                    <option value="">-- Selecione um Corpo de Bombeiro --</option>
+                    <option th:each="bom : ${bombeiro}"
+                            th:value="${bom.id}"
+                            th:text="${bom.nome}">
+                    </option>
+                </select>
+                <span th:if="${#fields.hasErrors('bombeiro')}" th:errors="*{bombeiro}" class="error">Erro no Corpo de Bombeiro</span>
+            </div>
 
-    </form>
+            <button type="submit">Salvar Bombeiro</button>
+            <a th:href="@{/bombeiros}" class="cancel-link">Cancelar</a>
+
+        </form>
+    </div>
 </div>
 </body>
 </html>

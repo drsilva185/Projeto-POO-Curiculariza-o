@@ -2,53 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Corpos de Bombeiro Cadastradas</title>
+    <title>Lista de Bombeiros Cadastrados</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { text-align: center; color: #333; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .actions a { margin-right: 10px; text-decoration: none; color: #007bff; }
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f8f8f8; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { text-align: center; color: #007bff; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        .actions a { margin-right: 15px; text-decoration: none; color: #28a745; font-weight: bold; }
+        .actions a.delete { color: #dc3545; }
         .actions a:hover { text-decoration: underline; }
         .novo-btn { display: inline-block; background-color: #28a745; color: white; padding: 10px 15px; border-radius: 4px; text-decoration: none; margin-bottom: 20px; }
         .novo-btn:hover { background-color: #1e7e34; }
+        .back-btn { margin-left: 10px; color: #6c757d; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Lista de Corpos de Bombeiros Cadastradas</h1>
+    <h1>Lista de Bombeiros Cadastrados</h1>
 
-    <a th:href="@{/bombeiro/novo}" class="novo-btn">Cadastrar Novo Corpo</a>
+    <a th:href="@{/bombeiros/novo}" class="novo-btn">Cadastrar Novo Bombeiro</a>
+    <a th:href="@{/}" class="back-btn">Voltar ao Menu Principal</a>
 
     <table>
         <thead>
         <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>Endereço</th>
-            <th>Telefone</th>
+            <th>Patente</th>
+            <th>Matrícula</th>
+            <th>Bombeiro (Unidade)</th>
             <th>Ações</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="bombeiro : ${listaBombeiros}">
-            <td th:text="${bombeiro.id}">1</td>
-            <td th:text="${bombeiro.nome}">Delegacia Central</td>
-            <td th:text="${bombeiro.endereco}">Rua Principal, 100</td>
-            <td th:text="${bombeiro.telefone}">(11) 98765-4321</td>
+        <tr th:each="bombeiros : ${listarBombeiros}">
+            <td th:text="${bombeiros.id}">1</td>
+            <td th:text="${bombeiros.nome}">João Silva</td>
+            <td th:text="${bombeiros.patente}">Comandante</td>
+            <td th:text="${bombeiros.matricula}">987654</td>
+            <td th:text="${bombeiros.bombeiro.nome}">Corpo Central</td>
             <td class="actions">
-                <a th:href="@{/bombeiro/editar/{id}(id=${bombeiro.id})}">Editar</a>
+                <a th:href="@{/bombeiros/editar/{id}(id=${bombeiros.id})}">Editar</a>
 
-                <a th:href="@{/bombeiro/deletar/{id}(id=${bombeiro.id})}"
-                   onclick="return confirm('Tem certeza que deseja deletar este Corpo de Bombeiros?');">Deletar</a>
+                <a th:href="@{/bombeiros/deletar/{id}(id=${bombeiros.id})}"
+                   onclick="return confirm('Tem certeza que deseja deletar este bombeiro?');"
+                   class="delete">Deletar</a>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <p th:if="${listaBombeiros.isEmpty()}">Nenhum Corpo de Bombeiro cadastrado.</p>
+    <p th:if="${listarBombeiros.isEmpty()}">Nenhum bombeiro cadastrado.</p>
 </div>
 </body>
 </html>

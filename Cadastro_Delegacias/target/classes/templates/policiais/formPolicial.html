@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Bombeiros</title>
+    <title>Cadastro de Policial</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
@@ -17,9 +17,9 @@
 <body>
 <div>
     <div class="container">
-        <h1>Cadastro de Bombeiros</h1>
+        <h1>Cadastro de Policial</h1>
 
-        <form th:action="@{/bombeiros}" th:object="${bombeiros}" method="post">
+        <form th:action="@{/policiais}" th:object="${policial}" method="post">
 
             <input type="hidden" th:field="*{id}" />
 
@@ -42,19 +42,19 @@
             </div>
 
             <div>
-                <label for="bombeiro">Bombeiro (Unidade):</label>
-                <select id="bombeiro" th:field="*{bombeiro}" required>
-                    <option value="">-- Selecione um Corpo de Bombeiro --</option>
-                    <option th:each="bom : ${bombeiro}"
-                            th:value="${bom.id}"
-                            th:text="${bom.nome}">
+                <label for="delegacia">Delegacia (Unidade):</label>
+                <select id="delegacia" th:field="*{delegacia}" required>
+                    <option value="">-- Selecione uma Delegacia --</option>
+                    <option th:each="del : ${delegacias}"
+                            th:value="${del.id}"
+                            th:text="${del.nome}">
                     </option>
                 </select>
-                <span th:if="${#fields.hasErrors('bombeiro')}" th:errors="*{bombeiro}" class="error">Erro no Corpo de Bombeiro</span>
+                <span th:if="${#fields.hasErrors('delegacia')}" th:errors="*{delegacia}" class="error">Erro na Delegacia</span>
             </div>
 
-            <button type="submit">Salvar Bombeiro</button>
-            <a th:href="@{/bombeiros}" class="cancel-link">Cancelar</a>
+            <button type="submit">Salvar Policial</button>
+            <a th:href="@{/policiais}" class="cancel-link">Cancelar</a>
 
         </form>
     </div>

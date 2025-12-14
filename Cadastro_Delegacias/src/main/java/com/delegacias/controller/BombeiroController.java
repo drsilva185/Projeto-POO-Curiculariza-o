@@ -25,14 +25,14 @@ public class BombeiroController {
     @GetMapping
     public String listarBombeiros(Model model) {
         List<Bombeiro> bombeiro = bombeiroService.buscarTodas();
-        model.addAttribute("listaBombeiros", bombeiro);
-        return "bombeiros/listaBombeiros";
+        model.addAttribute("listaBombeiro", bombeiro);
+        return "bombeiro/listaBombeiro";
     }
 
     @GetMapping("/novo")
     public String exibirFormulario(Model model) {
         model.addAttribute("bombeiro", new Bombeiro());
-        return "bombeiros/formBombeiros";
+        return "bombeiro/formBombeiro";
     }
 
     @PostMapping
@@ -43,16 +43,16 @@ public class BombeiroController {
 
         if (result.hasErrors()) {
             // Se houver erros, retorna para o formulário para exibir as mensagens de erro
-            return "bombeiros/formBombeiros";
+            return "bombeiro/formBombeiro";
         }
         bombeiroService.salvar(bombeiro);
         // Redireciona para a lista após salvar com sucesso
-        return "redirect:/bombeiros";
+        return "redirect:/bombeiro";
     }
 
     @GetMapping("/editar/{id}") // Mapeia requisições GET para /delegacias/editar/{id}
     public ModelAndView editarBombeiro(@PathVariable("id") Long id) {
-        ModelAndView mv = new ModelAndView("bombeiros/formBombeiros");
+        ModelAndView mv = new ModelAndView("bombeiro/formBombeiro");
         Bombeiro bombeiro = bombeiroService.buscarPorId(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID de Corpo inválido:" + id));
 
@@ -63,7 +63,7 @@ public class BombeiroController {
     @GetMapping("/deletar/{id}") // Mapeia requisições GET (usadas para deleção simples em aplicações web)
     public String deletarBombeiro(@PathVariable("id") Long id) {
         bombeiroService.deletarPorId(id);
-        return "redirect:/bombeiros";
+        return "redirect:/bombeiro";
     }
 
 }

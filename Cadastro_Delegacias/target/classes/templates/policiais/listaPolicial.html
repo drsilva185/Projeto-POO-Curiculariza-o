@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Bombeiros Cadastrados</title>
+    <title>Lista de Policiais Cadastrados</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background-color: #f8f8f8; }
         .container { max-width: 900px; margin: 0 auto; }
@@ -20,9 +20,9 @@
 </head>
 <body>
 <div class="container">
-    <h1>Lista de Bombeiros Cadastrados</h1>
+    <h1>Lista de Policiais Cadastrados</h1>
 
-    <a th:href="@{/bombeiros/novo}" class="novo-btn">Cadastrar Novo Bombeiro</a>
+    <a th:href="@{/policiais/novo}" class="novo-btn">Cadastrar Novo Policial</a>
     <a th:href="@{/}" class="back-btn">Voltar ao Menu Principal</a>
 
     <table>
@@ -32,29 +32,29 @@
             <th>Nome</th>
             <th>Patente</th>
             <th>Matrícula</th>
-            <th>Bombeiro (Unidade)</th>
+            <th>Delegacia (Unidade)</th>
             <th>Ações</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="bombeiros : ${listarBombeiros}">
-            <td th:text="${bombeiros.id}">1</td>
-            <td th:text="${bombeiros.nome}">João Silva</td>
-            <td th:text="${bombeiros.patente}">Comandante</td>
-            <td th:text="${bombeiros.matricula}">987654</td>
-            <td th:text="${bombeiros.bombeiro.nome}">Corpo Central</td>
+        <tr th:each="policial : ${listarPoliciais}">
+            <td th:text="${policial.id}">1</td>
+            <td th:text="${policial.nome}">João Silva</td>
+            <td th:text="${policial.patente}">Delegado</td>
+            <td th:text="${policial.matricula}">987654</td>
+            <td th:text="${policial.delegacia.nome}">Delegacia Central</td>
             <td class="actions">
-                <a th:href="@{/bombeiros/editar/{id}(id=${bombeiros.id})}">Editar</a>
+                <a th:href="@{/policiais/editar/{id}(id=${policial.id})}">Editar</a>
 
-                <a th:href="@{/bombeiros/deletar/{id}(id=${bombeiros.id})}"
-                   onclick="return confirm('Tem certeza que deseja deletar este bombeiro?');"
+                <a th:href="@{/policiais/deletar/{id}(id=${policial.id})}"
+                   onclick="return confirm('Tem certeza que deseja deletar este policial?');"
                    class="delete">Deletar</a>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <p th:if="${listarBombeiros.isEmpty()}">Nenhum bombeiro cadastrado.</p>
+    <p th:if="${listarPoliciais.isEmpty()}">Nenhum policial cadastrado.</p>
 </div>
 </body>
 </html>
